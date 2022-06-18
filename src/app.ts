@@ -1,7 +1,12 @@
 import express from "express";
+import config from "config";
+import connect from "./utils/connect";
 
-const PORT = process.env.PORT || 5000;
+const PORT = config.get<number>("port");
 
 const app = express();
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, async () => {
+    console.log(`Server started on port ${PORT}`);
+    await connect();
+});

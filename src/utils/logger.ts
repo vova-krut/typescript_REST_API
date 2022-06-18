@@ -11,7 +11,7 @@ const log = pino(
         base: {
             pid: false,
         },
-        timestamp: () => `,"time": "${dayjs().format()}"`,
+        timestamp: () => `,"time": "${dayjs().format("DD/MM/YYYY HH:mm:ss")}"`,
     },
     transport
 );

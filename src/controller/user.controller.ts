@@ -11,7 +11,7 @@ class UserController {
     ) {
         try {
             const user = await userService.createUser(req.body);
-            return res.json(omit(user.toJSON(), "password"));
+            return res.json(user);
         } catch (e: any) {
             logger.error(e);
             return res.status(409).send(e.message);

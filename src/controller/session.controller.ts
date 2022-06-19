@@ -24,6 +24,27 @@ class SessionController {
         );
         return res.json({ accessToken, refreshToken });
     }
+
+    async getUsersSessions(req: Request, res: Response) {
+        const userId = res.locals.user._id;
+        const sessions = await sessionService.getAllSessions({
+            user: userId,
+            valid: true,
+        });
+        return res.json({ sessions });
+    }
+
+    async deleteSession(req: Request, res: Response) {
+        const sessionId = res.locals.user.session;
+        await sessionService.updateSession(
+            { _id: sessionId },
+            { valid: false }
+        );
+        return res.json({
+            accessToken: null,
+            refreshToken: null,
+        });
+    }
 }
 
 export default new SessionController();

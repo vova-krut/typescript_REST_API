@@ -1,7 +1,7 @@
 import { UserDocument } from "./user.model";
 import mongoose from "mongoose";
 
-export interface SchemaDocument extends mongoose.Document {
+export interface SessionDocument extends mongoose.Document {
     user: UserDocument["_id"];
     valid: boolean;
     userAgent: string;

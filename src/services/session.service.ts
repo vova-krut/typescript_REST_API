@@ -1,4 +1,5 @@
-import Session from "../models/session.model";
+import { FilterQuery, UpdateQuery } from "mongoose";
+import Session, { SessionDocument } from "../models/session.model";
 
 class SessionService {
     async createSession(userId: string, userAgent: string) {
@@ -9,6 +10,17 @@ class SessionService {
         } catch (e: any) {
             throw new Error(e);
         }
+    }
+
+    async getAllSessions(query: FilterQuery<SessionDocument>) {
+        return Session.find(query).lean();
+    }
+
+    async updateSession(
+        query: FilterQuery<SessionDocument>,
+        update: UpdateQuery<SessionDocument>
+    ) {
+        return Session.updateOne(query, update);
     }
 }
 

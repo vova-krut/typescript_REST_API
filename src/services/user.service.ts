@@ -1,5 +1,5 @@
 import { omit } from "lodash";
-import { DocumentDefinition } from "mongoose";
+import { DocumentDefinition, FilterQuery } from "mongoose";
 import User, { UserDocument } from "../models/user.model";
 
 class UserService {
@@ -32,6 +32,10 @@ class UserService {
             return false;
         }
         return omit(user.toJSON(), "password");
+    }
+
+    async findUser(query: FilterQuery<UserDocument>) {
+        return User.findOne(query).lean();
     }
 }
 

@@ -20,7 +20,7 @@ class SessionController {
         );
         const refreshToken = signJwt(
             { ...user, session: session._id },
-            { expiresIn: config.get<number>("accessTokenTtl") } // 15 min
+            { expiresIn: config.get<number>("refreshTokenTtl") } // 1 year
         );
         return res.json({ accessToken, refreshToken });
     }
